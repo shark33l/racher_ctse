@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "866119469308",
+    "firebase_url": "https://racher-12d12.firebaseio.com",
+    "project_id": "racher-12d12",
+    "storage_bucket": "racher-12d12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866119469308:android:a338a50ca347d49d616f79",
+        "android_client_info": {
+          "package_name": "com.ctse.racher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866119469308-453mn3872o4b6008f0c8fdri2pd5o6mt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs-IEQBTERTDoAURzblKedz722M0DGhUI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "866119469308-453mn3872o4b6008f0c8fdri2pd5o6mt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
