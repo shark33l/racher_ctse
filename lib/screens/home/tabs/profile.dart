@@ -62,7 +62,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         backgroundColor: Colors.deepPurple[700],
                         child: Text(
                           userData.firstName.substring(0, 1).toUpperCase() + userData.lastName.substring(0, 1).toUpperCase(),
-                          style: TextStyle(fontSize: 40),
+                          style: TextStyle(fontSize: 40, color: Colors.white
+                          ),
                           ),
                       ),
                     ),
