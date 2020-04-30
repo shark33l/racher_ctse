@@ -28,6 +28,8 @@ dependencies:
   provider: ^4.0.5+1
   flutter_spinkit: ^4.1.2+1
   dotted_border: ^1.0.5
+  firebase_storage: ^3.1.5
+  image_picker: ^0.6.5+3
 
 
 dev_dependencies:

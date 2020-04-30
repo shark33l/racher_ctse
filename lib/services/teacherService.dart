@@ -19,9 +19,32 @@ class TeacherService {
 
   searchByName(String searchField) {
     return teacherCollection
-        .where('searchKey',
-            isEqualTo: searchField.substring(0, 1).toUpperCase())
+        .where('name',
+            isEqualTo: searchField)
         .getDocuments();
+  }
+
+  getAllTeachers() {
+    return teacherCollection.getDocuments();
+  }
+
+  Stream<QuerySnapshot> get allTeachers{
+    return teacherCollection.snapshots();
+  }
+
+  Future addTeacherData(String name, String description, List subjects, List institutes, String currentInstitute, List academicInitials, String displayPicture) async {
+    return await teacherCollection.add(
+      {
+        "name" : name,
+        "description" : description,
+        "subjects" : subjects,
+        "institutes" : institutes,
+        "currentInstitute" : currentInstitute,
+        "academicInitials" : academicInitials,
+        "rating": 0,
+        "displayPicture": displayPicture
+      }
+    );
   }
 
   // Get User

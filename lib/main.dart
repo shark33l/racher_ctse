@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:racher/screens/teachers/addTeacher.dart';
 import 'package:racher/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:racher/services/auth.dart';
@@ -13,7 +14,12 @@ class MyApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
         child: MaterialApp(
-        home: Wrapper(), 
+        initialRoute: '/', 
+        routes: {
+          '/' : (context) => Wrapper(),
+          '/teacher' : (context) => Wrapper(),
+          '/teacher/add' : (context) => AddTeacherScreen()
+        },
       ),
     );
   }
