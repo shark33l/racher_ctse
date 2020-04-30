@@ -38,7 +38,7 @@ class _RegisterState extends State<Register> {
     return Scaffold(
       backgroundColor: Colors.white,
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
+          padding: EdgeInsets.fromLTRB(50, 100, 50, 10),
           child: Form(
             key: _formKey,
             child: Column(

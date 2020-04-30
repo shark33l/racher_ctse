@@ -16,6 +16,7 @@ class _TeacherListState extends State<TeacherList> {
   var queryResultSet = [];
   var tempSearchStore = [];
   var resultsFound = false;
+  var searchValue = "";
 
   getSnapshotToQueries(snapshot){
     queryResultSet = [];
@@ -27,6 +28,11 @@ class _TeacherListState extends State<TeacherList> {
     queryResultSet.sort((a, b) {
       return a['name'].toLowerCase().compareTo(b['name'].toLowerCase());
     });
+
+    if(searchValue.length == 0){
+      tempSearchStore = queryResultSet;
+      resultsFound = true;
+    }
   }
 
   initiateSearch(String value){
@@ -68,6 +74,13 @@ class _TeacherListState extends State<TeacherList> {
           getSnapshotToQueries(snapshot.data);
 
           return Scaffold(
+              floatingActionButton: FloatingActionButton(
+                child: Icon(Icons.person_add),
+                backgroundColor: Colors.redAccent[400],
+                onPressed: (){
+                  Navigator.pushNamed(context, '/teacher/add');
+                }
+              ),
               body: Column(
               children: <Widget>[
                 Padding(
@@ -75,6 +88,9 @@ class _TeacherListState extends State<TeacherList> {
                   child: TextField(
                     onChanged: (val) {
                       initiateSearch(val);
+                      setState(() {
+                        searchValue = val;
+                      });
                     },
                     decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -123,7 +139,7 @@ class _TeacherListState extends State<TeacherList> {
             children: <Widget>[
               SizedBox(height: 10.0),
               Text(
-                "Sorry. Could not find the teachers. Try adding a teacher to review.",
+                "Sorry. Could not find teachers. Try adding a teacher to review.",
                 textAlign: TextAlign.center,
                 ),
               FlatButton.icon(onPressed: (){
