@@ -58,11 +58,11 @@ class Home extends StatelessWidget {
                                 unselectedLabelColor: Colors.black26,
                                 tabs: [
                                   Tab(
-                                    text: "Home",
+                                    text: "HOME",
                                     icon: Icon(Icons.home, size: 25),
                                   ),
                                   Tab(
-                                    text: "Teachers",
+                                    text: "TEACHERS",
                                     icon: Icon(Icons.school, size: 25),
                                   ),
                                   Tab(

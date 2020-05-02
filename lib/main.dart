@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:racher/screens/teachers/addTeacher.dart';
+import 'package:racher/screens/teachers/teacherDetail.dart';
 import 'package:racher/screens/wrapper.dart';
 import 'package:provider/provider.dart';
 import 'package:racher/services/auth.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/' : (context) => Wrapper(),
           '/teacher' : (context) => Wrapper(),
-          '/teacher/add' : (context) => AddTeacherScreen()
+          '/teacher/add' : (context) => AddTeacherScreen(),
+          '/teacher/details': (context)=> TeacherDetails()
         },
       ),
     );

@@ -1,5 +1,11 @@
+
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:racher/services/teacherService.dart';
+import 'package:racher/services/uploadFirestore.dart';
 import 'package:racher/shared/constants.dart';
 import 'package:racher/shared/loading.dart';
 
@@ -32,6 +38,16 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
   // Loading State
   bool loading = false;
 
+  File displayPicture;
+
+  Future getImage() async {
+    var tempImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState((){
+      displayPicture =  tempImage;
+    });
+  }
+
   // Form SizedBox size
   double formSizedBoxHeight = 10.0;
 
@@ -46,6 +62,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
       instituteList = [];
       academicInitials = '';
       academicInitialsList = [];
+      displayPicture = null;
     });
   }
 
@@ -99,17 +116,40 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                     ),
                     child: InkWell(
                       onTap: (){
-
+                        getImage();
                       },
                       highlightColor: Colors.deepPurple[700].withOpacity(0.5),
                       splashColor: Colors.deepPurpleAccent[400],
                       borderRadius: BorderRadius.circular(50),
-                      child: CircleAvatar(
+                      child: displayPicture == null ? CircleAvatar(
                         radius: 50,
                         backgroundColor: Colors.transparent,
-                        child: Icon(Icons.add_a_photo),
+                        child: Icon(Icons.add_a_photo) ,
+                      ) : ClipOval(
+                        child: Image.file(
+                          displayPicture,
+                          fit: BoxFit.cover,
+                          width: 100.0,
+                          height: 100.0,
+                        )
                       ),
                     ),
+                  ),
+                  displayPicture == null ? 
+                  SizedBox(child: Container(),)
+                  : SizedBox(
+                    child: FlatButton.icon(
+                      icon: Icon(Icons.close),
+                      label: Text(
+                        "Remove Image"
+                      ),
+                      color: Colors.white,
+                      onPressed: (){
+                        setState(() {
+                          displayPicture = null;
+                        });
+                      },
+                      )
                   ),
                   SizedBox(height: 20),
                   TextFormField(
@@ -182,7 +222,7 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                     decoration: textInputDecoration.copyWith(hintText:'Use comma to seperate.', labelText: 'Academic Initials'),
                   ),
                   generateChips(academicInitialsList),
-                  SizedBox(height: formSizedBoxHeight),
+                  SizedBox(height: 25),
                   SizedBox(
                     width: double.infinity,
                     child: RaisedButton.icon(
@@ -196,7 +236,11 @@ class _AddTeacherScreenState extends State<AddTeacherScreen> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()){
                           setState(() {loading = true;});
-                          dynamic result = teacherService.addTeacherData(name, description, subjectList, instituteList, currentInstitute, academicInitialsList, null);
+                          var pictureUrl;
+                          if(displayPicture != null){
+                            pictureUrl = await FirestoreUpload().uploadImageToFirestore("teachers", name, displayPicture);
+                          }
+                          dynamic result = teacherService.addTeacherData(name, description, subjectList, instituteList, currentInstitute, academicInitialsList, pictureUrl);
                           if (result == null) {
                             setState(() {
                               error = 'Could not add Teacher. Please Try again';

@@ -13,13 +13,15 @@ class UserData {
   final String lastName;
   final String displayPicture;
   bool firstVisit;
+  int color;
 
   UserData({
     this.uid,
     this.firstName,
     this.lastName,
     this.displayPicture,
-    this.firstVisit
+    this.firstVisit,
+    this.color
   });
   
 }

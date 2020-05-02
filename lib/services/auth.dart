@@ -48,7 +48,7 @@ class AuthService{
       FirebaseUser user= result.user;
 
       // Create user profile
-      await DatabaseService(uid: user.uid).updateUserData(firstName, lastName, 'empty', true);
+      await DatabaseService(uid: user.uid).updateUserData(firstName, lastName, null, true);
       return _userFromFirebaseUser(user);
     } catch(e) {
       print(e.toString());

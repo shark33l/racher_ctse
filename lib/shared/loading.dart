@@ -20,3 +20,13 @@ class LoadingFull extends StatelessWidget {
         );
   }
 }
+
+class ImageLoading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SpinKitDoubleBounce(
+      color: Colors.deepPurple[700],
+      size: 50,
+    );
+  }
+}
