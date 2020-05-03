@@ -92,9 +92,14 @@ class TeacherCard extends StatelessWidget {
         child: new Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            new Icon(type == "rating" ? Icons.star : Icons.school, size: 16, color: value !=0 ? Colors.yellow[700] : Colors.black45),
+            new Icon(type == "rating" ? Icons.star : Icons.school, size: 16, color: value.ratedUserCount !=0 ? Colors.yellow[700] : Colors.black45),
             new Container(width: 8.0),
-            new Text(value !=0 ? value.toString() : 'Not Rated Yet', style: TextStyle(fontSize: 14)),
+            new Text(value.ratedUserCount !=0 ? value.rating.toString() : 'Not Rated Yet', style: TextStyle(fontSize: 14)),
+            value.ratedUserCount > 0 ?
+            Padding(
+              padding: EdgeInsets.only(left: 4, top: 3),
+              child:Text(value.ratedUserCount > 1 ? '(${value.ratedUserCount} reviews)' : '(${value.ratedUserCount} review)', style: TextStyle(fontSize: 9, color: Colors.black38)))
+              : Container(),
           ]
         ),
       );
@@ -131,7 +136,7 @@ class TeacherCard extends StatelessWidget {
           new Expanded(
                 flex: 0,
                 child: _teacherValue(
-                  value: teacher.rating,
+                  value: teacher,
                   type: 'rating')
 
               ),

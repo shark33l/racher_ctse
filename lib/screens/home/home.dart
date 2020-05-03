@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:racher/screens/home/tabs/homeWall.dart';
 import 'package:racher/screens/home/tabs/profile.dart';
 import 'package:racher/screens/home/tabs/teacherList.dart';
 import 'package:racher/services/auth.dart';
@@ -80,7 +81,7 @@ class Home extends StatelessWidget {
                 body: TabBarView(
                   children: <Widget>[
                     Center(
-                      child: Text("Third Screen"),
+                      child: HomeWall(),
                     ),
                     Center(
                       child: TeacherList(),

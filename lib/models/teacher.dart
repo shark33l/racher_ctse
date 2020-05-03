@@ -7,10 +7,11 @@ class TeacherData {
   final List institutes;
   final String currentInstitute;
   final List academicInitials;
-  num rating;
+  double rating;
   final String displayPicture;
   final String coverPicture;
   int color;
+  num ratedUserCount;
 
   TeacherData({
     this.documentId,
@@ -23,7 +24,8 @@ class TeacherData {
     this.rating,
     this.displayPicture,
     this.coverPicture,
-    this.color
+    this.color,
+    this.ratedUserCount
   });
   
 }

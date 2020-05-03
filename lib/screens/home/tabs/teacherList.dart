@@ -213,7 +213,7 @@ class _TeacherListState extends State<TeacherList> {
                   child: Icon(
                     Icons.star,
                     size: 16,
-                    color: teacher.rating != 0
+                    color: teacher.ratedUserCount != 0
                         ? Colors.yellow[700]
                         : Colors.black45,
                   ),
@@ -223,7 +223,7 @@ class _TeacherListState extends State<TeacherList> {
               child: Padding(
                   padding: EdgeInsets.only(left: 10.0),
                   child: Text(
-                      teacher.rating != 0
+                      teacher.ratedUserCount != 0
                           ? teacher.rating.toString()
                           : "Not rated",
                       style: TextStyle(color: Colors.black45))),
