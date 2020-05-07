@@ -45,7 +45,7 @@ class HelperFunctions {
     } else if (duration.inSeconds == 0){  
       returnDate = "Just now";
     } else if(duration.inSeconds > 0) {
-      returnDate = returnDate + duration.inSeconds.toString() + 's ago';
+      returnDate = duration.inSeconds.toString() + 's ago';
     }
 
     return returnDate;

@@ -83,14 +83,20 @@ class _TeacherDetailsState extends State<TeacherDetails> {
 // Bottom Sheet for Review Form
     void _showReviewPanel() {
       showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (context) {
-            return Container(
-              padding:
-                  new EdgeInsets.symmetric(horizontal: 32.0, vertical: 15.0),
-              child: ReviewForm(
-                teacher: teacher,
+            return Wrap(
+              children:<Widget>[ 
+              Container(
+                height: 450,
+                padding:
+                    new EdgeInsets.symmetric(horizontal: 32.0, vertical: 15.0),
+                child: ReviewForm(
+                  teacher: teacher,
+                ),
               ),
+                          ]
             );
           });
     }
@@ -232,7 +238,7 @@ class _TeacherDetailsState extends State<TeacherDetails> {
           builder: (context, scrollableController) {
             return Container(
                 padding:
-                    new EdgeInsets.symmetric(horizontal: 32.0, vertical: 15.0),
+                    new EdgeInsets.fromLTRB(32.0, 15.0, 32.0, 0),
                 height: double.infinity,
                 decoration: new BoxDecoration(
                   color: Colors.white,

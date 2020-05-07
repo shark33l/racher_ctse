@@ -1,5 +1,5 @@
 name: racher
-description: A new Flutter project.
+description: App to rate your teacher.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -41,7 +41,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.7.5 
 
 flutter_icons:
-  image_path: "assets/icon/android-icon_fg.png"
+  image_path: "assets/icon/racher-icon.png"
   android: true
   ios: true
 

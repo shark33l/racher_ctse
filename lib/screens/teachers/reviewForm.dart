@@ -114,7 +114,7 @@ class _ReviewFormState extends State<ReviewForm> {
                         Icons.delete,
                         color: Colors.white,
                       ),
-                      label: loading
+                      label: loadingForDelete
                           ? Loading()
                           : Text(
                               'Delete existing review',
@@ -152,7 +152,7 @@ class _ReviewFormState extends State<ReviewForm> {
                           hintText: 'Type your review about this teacher',
                           labelText: "Review"),
                       validator: (val) =>
-                          val.isEmpty ? 'Please eneter a review' : null,
+                          val.isEmpty ? 'Please enter a review' : null,
                       onChanged: (val) => setState(() => review = val)),
                   SizedBox(height: 20),
                   Expanded(child: Container()),
@@ -199,7 +199,7 @@ class _ReviewFormState extends State<ReviewForm> {
                           Navigator.pop(context);
                         } else {
                           setState(() {
-                            error= "Please select a rating greater than 0";
+                            error= "Please fill all required fields (Rating & Review)";
                             loading= false;
                           });
                         }

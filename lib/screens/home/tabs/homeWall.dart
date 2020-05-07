@@ -19,17 +19,20 @@ class _HomeWallState extends State<HomeWall> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+      padding: EdgeInsets.fromLTRB(0, 12, 0, 0),
       height: double.infinity,
       width: double.infinity,
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-                    "Popular",
-                    style: Style.headerTextStyle,
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+              child: Text(
+                      "Popular",
+                      style: Style.headerTextStyle,
+                    ),
+            ),
             SizedBox(height: 15),
             Container(
               height: 80,
@@ -37,12 +40,15 @@ class _HomeWallState extends State<HomeWall> {
               child : getPopularTeacherList(),
             ),
             SizedBox(height: 25),
-            Text(
-                    "Reviews",
-                    style: Style.headerTextStyle,
-                  ),
             Padding(
-              padding: const EdgeInsets.only(right: 12.0, top: 12.0),
+              padding: const EdgeInsets.only(left:12.0),
+              child: Text(
+                      "Reviews",
+                      style: Style.headerTextStyle,
+                    ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left:10.0, right: 10.0, top: 12.0),
               child: getReviewList(),
             )
           ],)
@@ -59,6 +65,7 @@ class _HomeWallState extends State<HomeWall> {
           List<TeacherData> popularTeachers = snapshot.data;
 
           return ListView.builder(
+            padding: EdgeInsets.only(left: 12.0),
             scrollDirection: Axis.horizontal,
             itemCount: popularTeachers.length,
             itemBuilder: (context, index){
