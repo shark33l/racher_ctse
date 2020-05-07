@@ -19,7 +19,7 @@ class _HomeWallState extends State<HomeWall> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(12, 12, 0, 12),
+      padding: EdgeInsets.fromLTRB(12, 12, 0, 0),
       height: double.infinity,
       width: double.infinity,
       child: SingleChildScrollView(

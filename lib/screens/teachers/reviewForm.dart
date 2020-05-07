@@ -33,6 +33,7 @@ class _ReviewFormState extends State<ReviewForm> {
 
   // Loading
   bool loading = false;
+  bool loadingForDelete = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +60,69 @@ class _ReviewFormState extends State<ReviewForm> {
                   ),
                   SizedBox(height: 5),
                   snapshot.hasData ? Text(
-                    'Already Reviewed. Submit to update review.',
+                    'Already Reviewed. Submit to update review or delete to remove review.',
                     style: Style.smallTextStyle,
+                  ) : Container(),
+                  snapshot.hasData ?
+                  SizedBox(
+                    width: double.infinity,
+                    child: RaisedButton.icon(
+                      color: Colors.redAccent[400],
+                      onPressed: () async {
+                        setState(() {
+                          loadingForDelete = true;
+                          error = "";
+                        });
+                        num currentUserCount = widget.teacher.ratedUserCount;
+                        double currentTeacherRating = widget.teacher.rating * currentUserCount;
+                        if (updatedDate != null){
+                          currentTeacherRating =
+                                currentTeacherRating - snapshot.data.rating;
+                          currentUserCount = currentUserCount -1;
+                        }
+                        double avgTeacherRating;
+                        if(currentUserCount != 0){
+                          avgTeacherRating =
+                                currentTeacherRating /
+                                    currentUserCount; 
+                        } else {
+                          avgTeacherRating = 0;
+                        }
+                        var data = {
+                            "ratedUserCount": currentUserCount,
+                            "rating": avgTeacherRating
+                          };
+                        await TeacherService().updateTeacherData(
+                              widget.teacher.documentId, data);
+                        Future result = await ReviewService().deleteReviewByID(user.uid, widget.teacher.documentId);
+
+                        if(result == null){
+                          setState(() {
+                              loadingForDelete = false;
+                              updatedDate = null;
+                              review = null;
+                            });
+                          Navigator.pop(context);
+                        } else {
+                          setState(() {
+                            error= "Error when trying to delete";
+                            loadingForDelete= false;
+                          });
+                        }
+                      },
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
+                      label: loading
+                          ? Loading()
+                          : Text(
+                              'Delete existing review',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0)),
+                    ),
                   ) : Container(),
                   SizedBox(height: 20),
                   RatingBar(

@@ -39,13 +39,13 @@ class HelperFunctions {
     } else if (checkTimeValue(duration.inMinutes, 60) >= 1){
       returnDate = checkTimeValue(duration.inMinutes, 60).toString() + 'm ';
       if(checkTimeValue(duration.inSeconds, 60) >= 1){
-        returnDate = returnDate = checkTimeValue(duration.inSeconds, 60).toString() + 's';
+        returnDate = returnDate + checkTimeValue(duration.inSeconds, 60).toString() + 's';
       }
       returnDate = returnDate + ' ago';
     } else if (duration.inSeconds == 0){  
       returnDate = "Just now";
-    } else {
-      returnDate = returnDate = duration.inSeconds.toString() + 's ago';
+    } else if(duration.inSeconds > 0) {
+      returnDate = returnDate + duration.inSeconds.toString() + 's ago';
     }
 
     return returnDate;

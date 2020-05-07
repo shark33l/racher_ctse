@@ -71,6 +71,13 @@ class ReviewService {
     );
   }
 
+  // Delete review by ID
+  Future deleteReviewByID(String userId, String teacherId) async{
+    // Getting custom Review Id
+    String reviewDocumentId = userId+teacherId;
+    return await reviewCollection.document(reviewDocumentId).delete();
+  } 
+
 // get Review by Id
   Stream<Review> get reviewById{
     return  reviewCollection.document(reviewId).snapshots()
