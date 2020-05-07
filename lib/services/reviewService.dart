@@ -6,6 +6,7 @@ class ReviewService {
 
   ReviewService({this.reviewId});
   
+  // Collection Reviews
   final CollectionReference reviewCollection = Firestore.instance.collection("reviews");
 
   // Review Map
@@ -63,24 +64,28 @@ class ReviewService {
       data = dataIsNew;
     }
     
+    // Setting custom document Id for Reviews to call for update later
     String reviewDocumentId = userId+teacherId;
     return await reviewCollection.document(reviewDocumentId).setData(
       data, merge: true
     );
   }
 
+// get Review by Id
   Stream<Review> get reviewById{
     return  reviewCollection.document(reviewId).snapshots()
     .map(_reviewDataFromSnapshot);
   }
 
+// Get reviews of a specific teacher
   Stream<List<Review>> get specificTeacherReviews{
-    return reviewCollection.where("teacherId", isEqualTo: reviewId).orderBy("updatedDate").snapshots()
+    return reviewCollection.where("teacherId", isEqualTo: reviewId).orderBy("updatedDate", descending: true).snapshots()
     .map(_reviewListFromSnapshot);
   }
 
+// Get all Reviews
   Stream<List<Review>> get allReviews{
-    return reviewCollection.orderBy("updatedDate").snapshots()
+    return reviewCollection.orderBy("updatedDate", descending: true).snapshots()
     .map(_reviewListFromSnapshot);
   }
 }

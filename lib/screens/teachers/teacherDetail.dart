@@ -13,7 +13,6 @@ import 'package:racher/services/database.dart';
 import 'package:racher/services/reviewService.dart';
 import 'package:racher/services/teacherService.dart';
 import 'package:racher/services/uploadFirestore.dart';
-import 'package:racher/shared/helperFunctions.dart';
 import 'package:racher/shared/loading.dart';
 import 'package:racher/shared/separator.dart';
 import 'package:racher/shared/sharedWidget.dart';
@@ -34,6 +33,7 @@ class _TeacherDetailsState extends State<TeacherDetails> {
     return await ImagePicker.pickImage(source: ImageSource.gallery);
   }
 
+// Return function depending on choice of pupup menu
   void _select(choice) async {
     var pictureUrl;
     var data;
@@ -79,6 +79,8 @@ class _TeacherDetailsState extends State<TeacherDetails> {
     data = ModalRoute.of(context).settings.arguments;
     teacher = data["teacher"];
 
+
+// Bottom Sheet for Review Form
     void _showReviewPanel() {
       showModalBottomSheet(
           context: context,
@@ -142,6 +144,7 @@ class _TeacherDetailsState extends State<TeacherDetails> {
         });
   }
 
+// Cover Picture
   Container getCoverPicture() {
     return new Container(
       child: teacher.coverPicture != null
@@ -159,6 +162,7 @@ class _TeacherDetailsState extends State<TeacherDetails> {
     );
   }
 
+// Gradient for Cover Picture
   Container getGradient() {
     return new Container(
       margin: new EdgeInsets.only(top: 100.0),
@@ -174,6 +178,8 @@ class _TeacherDetailsState extends State<TeacherDetails> {
     );
   }
 
+
+// Body Content View
   Widget getContent() {
     final _firstTitle = "Bio";
     final _secondTitle = "Reviews";
@@ -209,7 +215,7 @@ class _TeacherDetailsState extends State<TeacherDetails> {
                           )
                         ],
                       )),
-                      HelperFunctions().generateChips(
+                      SharedWidget().generateChips(
                           teacher.institutes, Colors.black45, Colors.white)
                     ],
                   )
@@ -262,44 +268,14 @@ class _TeacherDetailsState extends State<TeacherDetails> {
 
   Widget getReviewList() {
     if (teacher.ratedUserCount == 0) {
-      return noReviewFound();
+      String textToShow = "Sorry. We looked everywhere and could not find reviews for ${teacher.name}. Be the first to review this teacher.";
+      return SharedWidget().noReviewFound(textToShow);
     } else {
       return reviewsFound();
     }
   }
 
-  Widget noReviewFound() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: DottedBorder(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(height: 10.0),
-              Text(
-                "Sorry. We looked everywhere and could not find reviews for ${teacher.name}. Be the first to review this teacher.",
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 10.0),
-            ],
-          ),
-          // decoration: BoxDecoration(
-          //   borderRadius: BorderRadius.circular(10),
-          //   border: Border.all(
-          //     width: 1.0,
-          //     color: Colors.black26,
-          //   )
-        ),
-        borderType: BorderType.RRect,
-        radius: Radius.circular(10.0),
-        color: Colors.black45,
-        dashPattern: [4, 8],
-      ),
-    );
-  }
-
+// Widget to show if reviews are found
   Widget reviewsFound() {
     List<Review> reviewList;
 
@@ -330,7 +306,7 @@ class _TeacherDetailsState extends State<TeacherDetails> {
                             builder: (context, snapshotTeacher) {
                               if (snapshotTeacher.hasData) {
                                 TeacherData teacherData = snapshotTeacher.data;
-                                return reviewCard(reviewList[reviewIndex],
+                                return SharedWidget().reviewCard(reviewList[reviewIndex],
                                     userData, teacherData);
                               } else {
                                 return Container();
@@ -347,88 +323,10 @@ class _TeacherDetailsState extends State<TeacherDetails> {
           }
         });
   }
-
-  Widget reviewCard(Review review, UserData userData, TeacherData teacherData) {
-    Color cardColor = Colors.deepPurple[600];
-    String username = userData.firstName + ' ' + userData.lastName;
-    if (review.rating == 4) {
-      cardColor = Colors.purple[600];
-    } else if (review.rating == 3) {
-      cardColor = Colors.pink[600];
-    } else if (review.rating == 2) {
-      cardColor = Colors.red[600];
-    } else if (review.rating == 1) {
-      cardColor = Colors.red[700];
-    }
-
-    String dateUnder =
-        HelperFunctions().getDateDiffOrDate(review.updatedDate, DateTime.now());
-
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      color: cardColor,
-      elevation: 4,
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ListTile(
-              dense: true,
-              leading: SharedWidget().getAvatar(userData, 20.0, 16.0, 'user'),
-              title: Text(
-                username,
-                style: TextStyle(color: Colors.white),
-              ),
-              subtitle: Text(dateUnder,
-                  style: TextStyle(color: Colors.white54, fontSize: 12)),
-            ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(12, 3, 12, 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 3.0),
-                    child: Text(teacherData.name,
-                        style:
-                            Style.titleTextStyle.copyWith(color: Colors.white)),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Expanded(
-                          flex: 0,
-                          child: Container(
-                            child: Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Colors.yellow[700],
-                            ),
-                          )),
-                      Expanded(
-                        flex: 2,
-                        child: Padding(
-                            padding: EdgeInsets.only(left: 5.0),
-                            child: Text(review.rating.toString(),
-                                style: TextStyle(color: Colors.white54))),
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                    child: Text(
-                      review.review,
-                      style: TextStyle(color: Colors.white70),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ]),
-    );
-  }
 }
 
+
+// Choices for the Popup Menu button dropdown
 class CoverChoice {
   const CoverChoice({this.title, this.icon, this.value});
 

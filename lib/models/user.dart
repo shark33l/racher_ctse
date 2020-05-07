@@ -1,3 +1,5 @@
+// Model to return UID
+
 class User {
 
   final String uid;
@@ -5,6 +7,8 @@ class User {
   User({this.uid});
   
 }
+
+// Model for Users
 
 class UserData {
 

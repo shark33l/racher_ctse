@@ -1,3 +1,5 @@
+// Model for Teachers
+
 class TeacherData {
 
   final String documentId;

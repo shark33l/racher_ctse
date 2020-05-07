@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Text Input Styles
 final textInputDecoration = InputDecoration(
     hintStyle: TextStyle(color: Colors.black45),
     labelStyle: TextStyle(color: Colors.black87),

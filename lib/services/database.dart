@@ -12,7 +12,6 @@ class DatabaseService {
   final CollectionReference userCollection = Firestore.instance.collection('users');
 
   // UserData from snapshot
-
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot){
     return UserData(
       uid: uid,

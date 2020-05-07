@@ -14,10 +14,11 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
+  // Service Used to Register user
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
-  // text Field State
+  // Text Field States
   String firstName = '';
   String lastName = '';
   String email = '';

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:racher/shared/helperFunctions.dart';
+import 'package:racher/shared/sharedWidget.dart';
 import 'package:racher/shared/textStyles.dart';
 import 'package:racher/models/teacher.dart';
-import 'package:racher/shared/constants.dart';
-import 'package:racher/shared/loading.dart';
 
+
+// Widget for Teacher Profile Card
 class TeacherCard extends StatelessWidget {
 
   final TeacherData teacher;
@@ -14,36 +15,6 @@ class TeacherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    Widget getAvatar(teacher) {
-    if (teacher.displayPicture == null) {
-      return CircleAvatar(
-        radius: 46,
-        backgroundColor: getColor(teacher.color),
-        child: Text(
-          teacher.name.substring(0, 1).toUpperCase(),
-          style: TextStyle(fontSize: 40, color: Colors.white),
-        ),
-      );
-    } else {
-      return ClipOval(
-          child: Image.network(
-        teacher.displayPicture,
-        loadingBuilder: (context, child, progress){
-          return progress == null
-            ? child
-            : SizedBox(
-              height: 92,
-              width: 92,
-              child: ImageLoading()
-            );
-        },
-        fit: BoxFit.cover,
-        width: 92.0,
-        height: 92.0,
-      ));
-    }
-  }
 
   List<Widget> generateChips(List list){
 
@@ -60,17 +31,6 @@ class TeacherCard extends StatelessWidget {
             ))
             .toList());
 
-      // return SizedBox(
-      //   width: double.infinity,
-      //   child: Wrap(
-      //     spacing: 4,
-      //     runSpacing: -8,
-      //     direction: Axis.horizontal,
-      //     alignment: WrapAlignment.center,
-      //     children: chipList
-      //   ),
-      // );
-
       return chipList;
   }
 
@@ -81,7 +41,7 @@ class TeacherCard extends StatelessWidget {
       alignment: FractionalOffset.center,
       child: new Hero(
           tag: "teacher-${teacher.documentId}",
-          child: getAvatar(teacher),
+          child: SharedWidget().getAvatar(teacher, 46.0, 40.0, "teacher"),
       ),
     );
 

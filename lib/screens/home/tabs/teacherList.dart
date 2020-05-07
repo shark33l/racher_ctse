@@ -5,6 +5,7 @@ import 'package:racher/services/teacherService.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:racher/shared/error.dart';
 import 'package:racher/shared/loading.dart';
+import 'package:racher/shared/sharedWidget.dart';
 
 class TeacherList extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _TeacherListState extends State<TeacherList> {
   var resultsFound = false;
   var searchValue = "";
 
+// Saving snapshots to states
   getSnapshotToQueries(teacherList) {
     queryResultSet = [];
     teacherList.forEach((teacher){
@@ -36,6 +38,7 @@ class _TeacherListState extends State<TeacherList> {
     }
   }
 
+// Function to filter list depending on search
   initiateSearch(String value) {
     if (value.length == 0) {
       setState(() {
@@ -129,6 +132,7 @@ class _TeacherListState extends State<TeacherList> {
         });
   }
 
+// View/Screen to return
   Widget getTeacherListView() {
     return resultsFound
         ? Expanded(
@@ -160,12 +164,6 @@ class _TeacherListState extends State<TeacherList> {
                         label: Text("Add Teacher"))
                   ],
                 ),
-                // decoration: BoxDecoration(
-                //   borderRadius: BorderRadius.circular(10),
-                //   border: Border.all(
-                //     width: 1.0,
-                //     color: Colors.black26,
-                //   )
               ),
               borderType: BorderType.RRect,
               radius: Radius.circular(10.0),
@@ -175,6 +173,7 @@ class _TeacherListState extends State<TeacherList> {
           );
   }
 
+// Teacher Card
   Card makeCard(teacher) => Card(
         elevation: 8.0,
         margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
@@ -184,6 +183,7 @@ class _TeacherListState extends State<TeacherList> {
         ),
       );
 
+// Teacher List tile for card
   ListTile makeListTile(teacher) => ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         leading: Container(
@@ -193,7 +193,7 @@ class _TeacherListState extends State<TeacherList> {
                   right: new BorderSide(width: 1.0, color: Colors.black26))),
           child: Hero(
             tag: "teacher-${teacher.documentId}",
-            child: getAvatar(teacher)
+            child: SharedWidget().getAvatar(teacher, 25.0, 20.0, "teacher")
             ),
         ),
         title: Text(
@@ -205,11 +205,6 @@ class _TeacherListState extends State<TeacherList> {
             Expanded(
                 flex: 0,
                 child: Container(
-                  // tag: 'hero',
-                  // child: LinearProgressIndicator(
-                  //     backgroundColor: Colors.blueGrey[50],
-                  //     value: 4/5,
-                  //     valueColor: AlwaysStoppedAnimation(Colors.greenAccent[700])),
                   child: Icon(
                     Icons.star,
                     size: 16,
@@ -236,34 +231,4 @@ class _TeacherListState extends State<TeacherList> {
           Navigator.pushNamed(context, '/teacher/details', arguments: {'teacher':teacher});
         },
       );
-
-  Widget getAvatar(teacher) {
-    if (teacher.displayPicture == null) {
-      return CircleAvatar(
-        radius: 25,
-        backgroundColor: getColor(teacher.color),
-        child: Text(
-          teacher.name.substring(0, 1).toUpperCase(),
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-      );
-    } else {
-      return ClipOval(
-          child: Image.network(
-        teacher.displayPicture,
-        loadingBuilder: (context, child, progress){
-          return progress == null
-            ? child
-            : SizedBox(
-              height: 50,
-              width: 50,
-              child: ImageLoading()
-            );
-        },
-        fit: BoxFit.cover,
-        width: 50.0,
-        height: 50.0,
-      ));
-    }
-  }
 }

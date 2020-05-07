@@ -1,3 +1,5 @@
+// Model for Reviews
+
 class Review {
 
   String documentId;

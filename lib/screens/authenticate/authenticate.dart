@@ -11,6 +11,7 @@ class _AuthenticateState extends State<Authenticate> {
 
   bool showSignIn = true;
 
+// Function to toggle between Sign in & Register
   void toggleView() {
     setState(() {
       showSignIn = !showSignIn;

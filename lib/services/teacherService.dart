@@ -73,6 +73,7 @@ class TeacherService {
     .map(_teacherDataFromSnapshot);
   }
 
+// Add teacher to database
   Future addTeacherData(String name, String description, List subjects, List institutes, String currentInstitute, List academicInitials, String displayPicture) async {
     return await teacherCollection.add(
       {
@@ -91,6 +92,7 @@ class TeacherService {
     );
   }
 
+// Update teacher by ID
   Future updateTeacherData(String teacherId, Object data) async {
     return await teacherCollection.document(teacherId).updateData(data);
   }

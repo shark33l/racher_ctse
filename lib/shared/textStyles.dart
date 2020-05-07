@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Text styles
 class Style {
   static final baseTextStyle = const TextStyle(
     fontFamily: 'Poppins'

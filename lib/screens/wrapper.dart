@@ -4,6 +4,7 @@ import 'package:racher/models/user.dart';
 import 'package:racher/screens/authenticate/authenticate.dart';
 import 'package:racher/screens/home/home.dart';
 
+// Widget to return depending if the user is signed in or not
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

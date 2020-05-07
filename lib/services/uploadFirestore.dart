@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart';
 
+
+// Class to upload or store Pictures
 class FirestoreUpload{
 
   final String userPath = "user/";

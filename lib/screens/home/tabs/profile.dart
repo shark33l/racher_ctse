@@ -32,6 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   File displayPicture;
 
+// Open Gallery and select image
   Future getImage() async {
     var tempImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -40,6 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+// Toggle between Edit and profile
   editToggle() {
     setState(() {
       showEdit = !showEdit;
@@ -86,6 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+// Sign out button
   Widget signOutButton() {
     return SizedBox(
       width: double.infinity,
@@ -105,6 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+// Screen to be visble before edit.
   Widget beforeEdit(UserData userData) {
     return SingleChildScrollView(
       child: Column(
@@ -140,6 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+// Buttons to be visible before edit
   Widget beforeEditButton() {
     return SizedBox(
       width: double.infinity,
@@ -159,6 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+// Edittable screen to be visible on Edit
   Widget onEdit(UserData userData) {
     return SingleChildScrollView(
       child: Form(
@@ -239,6 +245,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+// Buttons to be visible on edit
   Widget onEditButtons(UserData userData) {
     return Row(children: <Widget>[
       MaterialButton(
@@ -321,6 +328,8 @@ class _ProfilePageState extends State<ProfilePage> {
     ]);
   }
 
+
+// Avatar to be visible before edit
   Widget getAvatar(userData) {
     if (userData.displayPicture == null) {
       return CircleAvatar(
@@ -351,6 +360,8 @@ class _ProfilePageState extends State<ProfilePage> {
       ));
     }
   }
+
+  // Avatar and icon to be visible on edit
   Widget getAvatarOnEdit(userData) {
     if(displayPicture != null){
       return ClipOval(

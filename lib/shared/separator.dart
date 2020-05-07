@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Separator
 class Separator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -11,6 +12,8 @@ class Separator extends StatelessWidget {
     );
   }
 }
+
+// Thin Neutral Separators
 class CardSeparator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

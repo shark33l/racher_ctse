@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+// Small Loading for buttons
 class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -11,6 +12,7 @@ class Loading extends StatelessWidget {
   }
 }
 
+// Full Screen Loading
 class LoadingFull extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class LoadingFull extends StatelessWidget {
   }
 }
 
+// Loader for Images
 class ImageLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
