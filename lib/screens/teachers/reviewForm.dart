@@ -152,7 +152,7 @@ class _ReviewFormState extends State<ReviewForm> {
                           hintText: 'Type your review about this teacher',
                           labelText: "Review"),
                       validator: (val) =>
-                          val.isEmpty ? 'Please enter a review' : null,
+                          val.isEmpty ? 'Please enInter a review' : null,
                       onChanged: (val) => setState(() => review = val)),
                   SizedBox(height: 20),
                   Expanded(child: Container()),

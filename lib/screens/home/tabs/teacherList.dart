@@ -144,7 +144,7 @@ class _TeacherListState extends State<TeacherList> {
                 }),
           )
         : Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: const EdgeInsets.fromLTRB(30.0, 8.0, 30.0, 0),
             child: DottedBorder(
               child: Container(
                 padding: const EdgeInsets.all(10.0),
